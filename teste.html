@@ -46,6 +46,14 @@
             text-align: center;
         }
 
+        .numberPlayer {
+            position: absolute;
+            top: 55px;
+            width: 50px;
+            text-align: center;
+            font-size: 8px;
+        }
+
         .formation-select {
             margin-bottom: 20px;
             text-align: center;
@@ -113,6 +121,44 @@
         .w-70 {
             width: 70%
         }
+
+        .btn-success-player {
+            color: #fff;
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-success-player:hover {
+            color: #fff;
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+
+        .btn-success-player:focus,
+        .btn-success-player.focus {
+            box-shadow: 0 0 0 0.2rem rgba(72, 180, 97, 0.5);
+        }
+
+        .btn-success-player.disabled,
+        .btn-success-player:disabled {
+            color: #fff;
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-success-player:not(:disabled):not(.disabled):active,
+        .btn-success-player:not(:disabled):not(.disabled).active,
+        .show>.btn-success-player.dropdown-toggle {
+            color: #fff;
+            background-color: #1e7e34;
+            border-color: #1c7430;
+        }
+
+        .btn-success-player:not(:disabled):not(.disabled):active:focus,
+        .btn-success-player:not(:disabled):not(.disabled).active:focus,
+        .show>.btn-success-player.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.2rem rgba(72, 180, 97, 0.5);
+        }
     </style>
 </head>
 
@@ -167,8 +213,9 @@
                 <div class="row mt-4">
                     <div class="col-md-12">
                         <div class="dropdown">
-                            <button type="button" class="btn btn-secondary dropdown-toggle w-100"
-                                data-toggle="dropdown">
+                            <button id="dropdownMenuButton" type="button"
+                                class="btn btn-secondary dropdown-toggle w-100" data-toggle="dropdown"
+                                aria-expanded="false">
                                 4-4-2
                             </button>
                             <div class="dropdown-menu">
@@ -183,8 +230,9 @@
             </div>
             <div class="col-md-6">
                 <div class="row">
-                    <div class="offset-2 col-md-8">
-                        <img onclick="" src="mapaesquerdadireita.png" height="300" width="100%" alt="Field Image">
+                    <div id="field" class="offset-2 col-md-8"
+                        style="height: 300px; width: 100%; border:1px solid #e0dede">
+
                     </div>
                 </div>
                 <div class="row">
@@ -314,31 +362,69 @@
 
     <script>
         let selectedPlayer = null;
+        let selectedFormation = '4-4-2';
+
+        $(document).ready(function () {
+            $('.dropdown-item').click(function () {
+                var selectedText = $(this).text();
+                $('#dropdownMenuButton').text(selectedText);
+                selectedFormation = selectedText;
+                updateFormation();
+            });
+        });
 
         const playerPositions = {
             '4-4-2': [
-                { name: 'G', x: 50, y: 175 },
-                { name: 'D1', x: 150, y: 50 }, { name: 'D2', x: 150, y: 125 }, { name: 'D3', x: 150, y: 225 }, { name: 'D4', x: 150, y: 300 },
-                { name: 'M1', x: 300, y: 50 }, { name: 'M2', x: 300, y: 125 }, { name: 'M3', x: 300, y: 225 }, { name: 'M4', x: 300, y: 300 },
-                { name: 'F1', x: 500, y: 125 }, { name: 'F2', x: 500, y: 225 }
+                { name: 'G', x: 0, y: 120, player: 'Hugo Souza', number: 1 },
+                { name: 'D1', x: 100, y: 0, player: 'Fagner', number: 23 },
+                { name: 'D2', x: 70, y: 70, player: 'Filipe Luís', number: 6 },
+                { name: 'D3', x: 70, y: 140, player: 'Rodrigo Caio', number: 4 },
+                { name: 'D4', x: 100, y: 210, player: 'Gustavo Henrique', number: 8 },
+                { name: 'M1', x: 220, y: 0, player: 'Gerson', number: 15 },
+                { name: 'M2', x: 180, y: 70, player: 'Willian Arão', number: 5 },
+                { name: 'M3', x: 180, y: 140, player: 'Everton Ribeiro', number: 7 },
+                { name: 'M4', x: 220, y: 220, player: 'Arrascaeta', number: 14 },
+                { name: 'F1', x: 300, y: 70, player: 'Gabigol', number: 9 },
+                { name: 'F2', x: 300, y: 170, player: 'Bruno Henrique', number: 27 }
             ],
             '4-3-3': [
-                { name: 'G', x: 50, y: 175 },
-                { name: 'D1', x: 150, y: 50 }, { name: 'D2', x: 150, y: 125 }, { name: 'D3', x: 150, y: 225 }, { name: 'D4', x: 150, y: 300 },
-                { name: 'M1', x: 300, y: 75 }, { name: 'M2', x: 300, y: 175 }, { name: 'M3', x: 300, y: 275 },
-                { name: 'F1', x: 500, y: 75 }, { name: 'F2', x: 500, y: 175 }, { name: 'F3', x: 500, y: 275 }
+                { name: 'G', x: 0, y: 120, player: 'Nome', number: 1 },
+                { name: 'D1', x: 100, y:0, player: 'Nome', number: 2 }, 
+                { name: 'D2', x: 70, y: 75, player: 'Nome', number: 3 }, 
+                { name: 'D3', x: 70, y: 150, player: 'Nome', number: 4 }, 
+                { name: 'D4', x: 100, y: 225, player: 'Nome', number: 5 },
+                { name: 'M1', x: 220, y: 37, player: 'Nome', number: 6 }, 
+                { name: 'M2', x: 180, y: 112, player: 'Nome', number: 7 }, 
+                { name: 'M3', x: 220, y: 185, player: 'Nome', number: 8 },
+                { name: 'F1', x: 300, y: 70, player: 'Nome', number: 9 }, 
+                { name: 'F2', x: 375, y: 120, player: 'Nome', number: 10 }, 
+                { name: 'F3', x: 300, y: 170, player: 'Nome', number: 11 }
             ],
             '3-5-2': [
-                { name: 'G', x: 50, y: 175 },
-                { name: 'D1', x: 150, y: 75 }, { name: 'D2', x: 150, y: 175 }, { name: 'D3', x: 150, y: 275 },
-                { name: 'M1', x: 300, y: 25 }, { name: 'M2', x: 300, y: 100 }, { name: 'M3', x: 300, y: 175 }, { name: 'M4', x: 300, y: 250 }, { name: 'M5', x: 300, y: 325 },
-                { name: 'F1', x: 500, y: 125 }, { name: 'F2', x: 500, y: 225 }
+                { name: 'G', x: 0, y: 120, player: 'Nome', number: 1 },
+                { name: 'D1', x: 100, y: 0, player: 'Nome', number: 2 }, 
+                { name: 'D2', x: 70, y: 120, player: 'Nome', number: 3 }, 
+                { name: 'D3', x: 100, y: 225, player: 'Nome', number: 4 },
+                { name: 'M1', x: 300, y: 0, player: 'Nome', number: 5 }, 
+                { name: 'M2', x: 225, y: 50, player: 'Nome', number: 6 }, 
+                { name: 'M3', x: 175, y: 120, player: 'Nome', number: 7 }, 
+                { name: 'M4', x: 225, y: 190, player: 'Nome', number: 8 }, 
+                { name: 'M5', x: 300, y: 225, player: 'Nome', number: 9 },
+                { name: 'F1', x: 400, y: 85, player: 'Nome', number: 10 }, 
+                { name: 'F2', x: 400, y: 172, player: 'Nome', number: 11 }
             ],
             '5-3-2': [
-                { name: 'G', x: 50, y: 175 },
-                { name: 'D1', x: 150, y: 25 }, { name: 'D2', x: 150, y: 100 }, { name: 'D3', x: 150, y: 175 }, { name: 'D4', x: 150, y: 250 }, { name: 'D5', x: 150, y: 325 },
-                { name: 'M1', x: 300, y: 75 }, { name: 'M2', x: 300, y: 175 }, { name: 'M3', x: 300, y: 287.5 },
-                { name: 'F1', x: 500, y: 125 }, { name: 'F2', x: 500, y: 231.25 }
+                { name: 'G', x: 0, y: 120, player: 'Nome', number: 1 },
+                { name: 'D1', x: 150, y: 0, player: 'Nome', number: 2 }, 
+                { name: 'D2', x: 90, y: 50, player: 'Nome', number: 2 }, 
+                { name: 'D3', x: 70, y: 120, player: 'Nome', number: 3 }, 
+                { name: 'D4', x: 90, y: 190, player: 'Nome', number: 4 }, 
+                { name: 'D5', x: 150, y: 225, player: 'Nome', number: 5 },
+                { name: 'M1', x: 250, y: 37, player: 'Nome', number: 6 }, 
+                { name: 'M2', x: 210, y: 112, player: 'Nome', number: 7 }, 
+                { name: 'M3', x: 250, y: 185, player: 'Nome', number: 8 },
+                { name: 'F1', x: 350, y: 75, player: 'Nome', number: 9 }, 
+                { name: 'F2', x: 350, y: 150, player: 'Nome', number: 10 }
             ]
         };
 
@@ -355,28 +441,44 @@
             playerName.className = 'player-name';
             playerName.innerText = player.name;
             playerName.style.left = player.x + 'px';
-            playerName.style.top = player.y + 55 + 'px'; // Ajustado para mostrar o nome abaixo
+            playerName.style.top = player.y + 20 + 'px'; // Ajustado para mostrar o nome abaixo
 
-            // Adiciona evento de clique no jogador
-            playerDiv.addEventListener('click', (e) => {
+            const playerCamisa = document.createElement('div');
+            playerCamisa.className = 'numberPlayer';
+            playerCamisa.innerText = player.player;
+            playerCamisa.style.left = player.x + 'px';
+            playerCamisa.style.top = player.y + 50 + 'px';
+            playerCamisa.id = player.number;
+
+            addEventListenerPlayer(playerName, player);
+            addEventListenerPlayer(playerCamisa, player);
+            addEventListenerPlayer(playerDiv, player);
+
+            return { playerDiv, playerName, playerCamisa };
+        }
+
+        function addEventListenerPlayer(element, player) {
+            element.addEventListener('click', (e) => {
                 e.stopPropagation(); // Impede que o clique na imagem do campo seja acionado
                 selectedPlayer = player.name;
+                $('.btn-success-player').removeClass('btn-success-player');
+                document.getElementById(player.number).classList.add('btn-success-player');
+                console.log(`Jogador ${player.player} selecionado`);
             });
-
-            return { playerDiv, playerName };
         }
 
         function updateFormation() {
-            /*  const field = document.getElementById('field');
-              field.innerHTML = '';
-              const formation = document.getElementById('formation').value;
-              const formationPlayers = playerPositions[formation];
-  
-              formationPlayers.forEach(player => {
-                  const { playerDiv, playerName } = createPlayer(player);
-                  field.appendChild(playerDiv);
-                  field.appendChild(playerName);
-              });*/
+            const field = document.getElementById('field');
+            field.innerHTML = '';
+            const formation = selectedFormation; //document.getElementById('formation').value;
+            const formationPlayers = playerPositions[formation];
+
+            formationPlayers.forEach(player => {
+                const { playerDiv, playerName, playerCamisa } = createPlayer(player);
+                field.appendChild(playerDiv);
+                field.appendChild(playerName);
+                field.appendChild(playerCamisa);
+            });
         }
 
         function createQuadrant(x, y) {
@@ -387,8 +489,6 @@
             return quadrant;
         }
 
-
-
         document.getElementById('grid-container').addEventListener('click', (e) => {
             const rect = e.target.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -396,7 +496,7 @@
             console.log(`Jogador ${selectedPlayer} - Coordenadas: X = ${x}, Y = ${y}`);
             //x = largura
             //y = altura
-            
+
             //linha 1
             if (x <= 100 && y < 66)
                 console.log('quadrante 1');
@@ -410,12 +510,12 @@
                 console.log('quadrante 25');
             else if (x >= 500 && x <= 600 && y < 66)
                 console.log('quadrante 31');
-            
+
             //linha 2
             else if (x <= 100 && y < 132)
                 console.log('quadrante 2');
             else if (x >= 100 && x <= 200 && y < 132)
-                console.log('quadrante 8'); 
+                console.log('quadrante 8');
             else if (x >= 200 && x <= 300 && y < 132)
                 console.log('quadrante 14');
             else if (x >= 300 && x <= 400 && y < 132)
@@ -426,10 +526,10 @@
                 console.log('quadrante 32');
 
             //linha 3
-                else if (x <= 100 && y < 198)
+            else if (x <= 100 && y < 198)
                 console.log('quadrante 3');
             else if (x >= 100 && x <= 200 && y < 198)
-                console.log('quadrante 9'); 
+                console.log('quadrante 9');
             else if (x >= 200 && x <= 300 && y < 198)
                 console.log('quadrante 15');
             else if (x >= 300 && x <= 400 && y < 198)
@@ -440,10 +540,10 @@
                 console.log('quadrante 33');
 
             //linha 4    
-                else if (x <= 100 && y < 264)
+            else if (x <= 100 && y < 264)
                 console.log('quadrante 4');
             else if (x >= 100 && x <= 200 && y < 264)
-                console.log('quadrante 10'); 
+                console.log('quadrante 10');
             else if (x >= 200 && x <= 300 && y < 264)
                 console.log('quadrante 16');
             else if (x >= 300 && x <= 400 && y < 264)
@@ -454,10 +554,10 @@
                 console.log('quadrante 34');
 
             //linha 5
-                else if (x <= 100 && y < 330)
+            else if (x <= 100 && y < 330)
                 console.log('quadrante 5');
             else if (x >= 100 && x <= 200 && y < 330)
-                console.log('quadrante 11'); 
+                console.log('quadrante 11');
             else if (x >= 200 && x <= 300 && y < 330)
                 console.log('quadrante 17');
             else if (x >= 300 && x <= 400 && y < 330)
@@ -468,10 +568,10 @@
                 console.log('quadrante 35');
 
             //linha 6    
-                else if (x <= 100 && y < 396)
+            else if (x <= 100 && y < 396)
                 console.log('quadrante 6');
             else if (x >= 100 && x <= 200 && y < 396)
-                console.log('quadrante 12'); 
+                console.log('quadrante 12');
             else if (x >= 200 && x <= 300 && y < 396)
                 console.log('quadrante 18');
             else if (x >= 300 && x <= 400 && y < 396)
@@ -480,9 +580,9 @@
                 console.log('quadrante 30');
             else if (x >= 500 && x <= 600 && y < 396)
                 console.log('quadrante 36');
-                
-                
-            
+
+
+
 
 
             selectedPlayer = null; // Reseta o jogador selecionado
