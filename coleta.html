@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.3/css/dataTables.dataTables.css">
+    <script>
+        function openFullScreen(url) {
+            // Abre uma nova janela
+            var newWindow = window.open(url, 'newWindow', 'width=1920,height=1080');
+
+            // Tenta colocar a nova janela em tela cheia
+            if (newWindow) {
+                newWindow.onload = function () {
+                    if (newWindow.document.fullscreenEnabled || newWindow.document.webkitFullscreenEnabled || newWindow.document.mozFullScreenEnabled || newWindow.document.msFullscreenEnabled) {
+                        var requestFullScreen = newWindow.document.documentElement.requestFullscreen ||
+                            newWindow.document.documentElement.webkitRequestFullscreen ||
+                            newWindow.document.documentElement.mozRequestFullScreen ||
+                            newWindow.document.documentElement.msRequestFullscreen;
+                        if (requestFullScreen) {
+                            requestFullScreen.call(newWindow.document.documentElement);
+                        }
+                    }
+                }
+            }
+
+            const elem = document.documentElement; // Seleciona o elemento raiz (documento)
+
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.mozRequestFullScreen) { // Firefox
+                elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullscreen) { // Chrome, Safari e Opera
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { // Internet Explorer/Edge
+                elem.msRequestFullscreen();
+            }
+        }
+    </script>
+    <style>
+        .score-input {
+            width: 50px;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 0 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-1">
+                        <button type="button" class="btn btn-primary w-100">Iniciar</button>
+                    </div>
+                    <div class="col-md-1">
+                        <button type="button" class="btn btn-warning w-100">Alterar</button>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="btn">1° tp - 42:45</div>
+                    </div>
+                    <div class="col-md-1">
+                        <button type="button" class="btn btn-danger">Encerrar</button>
+                    </div>
+                    <div class="offset-md-1 col-md-5 d-flex align-items-center justify-content-center">
+                        <div class="input-group mb-3 w-auto">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">BRA</span>
+                            </div>
+                            <input type="number" class="score-input" placeholder="0" min="0">
+                        </div>
+                        <span class="mx-2">X</span>
+                        <div class="input-group mb-3 w-auto">
+                            <input type="number" class="score-input" placeholder="0" min="0">
+                            <div class="input-group-append">
+                                <span class="input-group-text">ARG</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1 ">
+                        <button type="button" onclick="openFullScreen('teclado.html')"
+                            class="btn btn-success">Teclado</button>
+                    </div>
+                </div>
+            </div>
+            <div >
+                <table id="example" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Office</th>
+                            <th>Age</th>
+                            <th>Start date</th>
+                            <th>Salary</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tiger Nixon</td>
+                            <td>System Architect</td>
+                            <td>Edinburgh</td>
+                            <td>61</td>
+                            <td>2011-04-25</td>
+                            <td>$320,800</td>
+                        </tr>
+                        <tr>
+                            <td>Garrett Winters</td>
+                            <td>Accountant</td>
+                            <td>Tokyo</td>
+                            <td>63</td>
+                            <td>2011-07-25</td>
+                            <td>$170,750</td>
+                        </tr>
+                        <tr>
+                            <td>Ashton Cox</td>
+                            <td>Junior Technical Author</td>
+                            <td>San Francisco</td>
+                            <td>66</td>
+                            <td>2009-01-12</td>
+                            <td>$86,000</td>
+                        </tr>
+                        <tr>
+                            <td>Cedric Kelly</td>
+                            <td>Senior Javascript Developer</td>
+                            <td>Edinburgh</td>
+                            <td>22</td>
+                            <td>2012-03-29</td>
+                            <td>$433,060</td>
+                        </tr>
+                        <tr>
+                            <td>Airi Satou</td>
+                            <td>Accountant</td>
+                            <td>Tokyo</td>
+                            <td>33</td>
+                            <td>2008-11-28</td>
+                            <td>$162,700</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card-footer">Footer</div>
+        </div>
+    </div>
+
+
+</body>
+<script src="https://cdn.datatables.net/2.1.3/js/dataTables.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable({
+            paging: false,
+            searching: false,
+            ordering: false,
+            info: false
+        });
+    });
+
+</script>
+
+
+</html>

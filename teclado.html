@@ -59,18 +59,6 @@
             text-align: center;
         }
 
-        /* .grid-container {
-            position: relative;
-            width: 918px;
-            height: 594px;
-            border: 1px solid #000;
-        }
-
-        .grid-container img {
-            width: 100%;
-            height: auto;
-        } */
-
         .quadrant {
             position: absolute;
             width: 153px;
@@ -159,19 +147,34 @@
         .show>.btn-success-player.dropdown-toggle:focus {
             box-shadow: 0 0 0 0.2rem rgba(72, 180, 97, 0.5);
         }
+
+        #fullscreenBtn {
+            display: block;
+
+        }
+
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1050;
+            /* Bootstrap toast z-index */
+        }
     </style>
 </head>
 
 <body>
     <div class="container-fluid ">
         <div class="row">
-
+            <div class="offset-md-5 col-md-3">
+                <button id="fullscreenBtn" class="btn btn-secondary">Tela cheia</button>
+            </div>
         </div>
         <div class="row mt-2">
             <div class="col-md-1">
                 <div class="row">
                     <div class="col-md-12">
-                        <button type="button" class="btn btn-success  w-100" onclick="alert('gol')">Gol</button>
+                        <button type="button" class="btn btn-success  w-100" onclick="evento('gol')">Gol</button>
                     </div>
                 </div>
                 <div class="row mt-4">
@@ -207,7 +210,7 @@
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
-                        <button type="button" class="btn btn-outline-warning  w-100">Limpar</button>
+                        <a type="button"  class="btn btn-outline-warning  w-100" href="teclado.html">Limpar</a>
                     </div>
                 </div>
                 <div class="row mt-4">
@@ -246,31 +249,31 @@
                 <div class="row">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-success w-70" data-toggle="tooltip" data-placement="top"
-                            title="Passe certo" onclick="alert('Passe certo')">Passe</button>
+                            title="Passe certo" onclick="console.log('Passe certo')">Passe</button>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-success w-70" data-toggle="tooltip" data-placement="top"
-                            title="Drible certo" onclick="alert('Drible certo')">Drible</button>
+                            title="Drible certo" onclick="console.log('Drible certo')">Drible</button>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-success w-70" data-toggle="tooltip" data-placement="top"
-                            title="Lançamento certo" onclick="alert('Lançamento certo')">Lançamento</button>
+                            title="Lançamento certo" onclick="console.log('Lançamento certo')">Lançamento</button>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-success w-70" data-toggle="tooltip" data-placement="top"
-                            title="Cruzamento certo" onclick="alert('Cruzamento certo')">Cruzamento</button>
+                            title="Cruzamento certo" onclick="console.log('Cruzamento certo')">Cruzamento</button>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-success  w-70" data-toggle="tooltip" data-placement="top"
-                            title="Finalização certa" onclick="alert('Finalização certa')">
+                            title="Finalização certa" onclick="console.log('Finalização certa')">
                             Finalização
                         </button>
                     </div>
@@ -278,19 +281,20 @@
                 <div class="row mt-5">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-success w-70" data-toggle="tooltip" data-placement="top"
-                            title="Desarme certo" onclick="alert('Desarme certo')">Desarme</button>
+                            title="Desarme certo" onclick="console.log('Desarme certo')">Desarme</button>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-success w-70" data-toggle="tooltip" data-placement="top"
-                            title="Interceptação certa" onclick="alert('Interceptação certo')">Interceptação</button>
+                            title="Interceptação certa"
+                            onclick="console.log('Interceptação certo')">Interceptação</button>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-success w-70" data-toggle="tooltip" data-placement="top"
-                            title="Virada certa" onclick="alert('Virada de jogo certa')">Virada de jogo</button>
+                            title="Virada certa" onclick="console.log('Virada de jogo certa')">Virada de jogo</button>
                     </div>
                 </div>
             </div>
@@ -298,68 +302,69 @@
                 <div class="row">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-danger  w-70" data-toggle="tooltip" data-placement="top"
-                            title="Passe Errado" onclick="alert('Passe Errado')">Passe </button>
+                            title="Passe Errado" onclick="console.log('Passe Errado')">Passe </button>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-danger  w-70" data-toggle="tooltip" data-placement="top"
-                            title="Drible Errado" onclick="alert('Drible errado ')">Drible </button>
+                            title="Drible Errado" onclick="console.log('Drible errado ')">Drible </button>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-danger  w-70" data-toggle="tooltip" data-placement="top"
-                            title="Lançamento Errado" onclick="alert('Lançamento errado ')">Lançamento</button>
+                            title="Lançamento Errado" onclick="console.log('Lançamento errado ')">Lançamento</button>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-danger  w-70" data-toggle="tooltip" data-placement="top"
-                            title="Cruzamento Errado" onclick="alert('Cruzamento errado ')">Cruzamento</button>
+                            title="Cruzamento Errado" onclick="console.log('Cruzamento errado ')">Cruzamento</button>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-danger  w-70" data-toggle="tooltip" data-placement="top"
-                            title="Finalização Errada" onclick="alert('Finalização errada')">Finalização</button>
+                            title="Finalização Errada" onclick="console.log('Finalização errada')">Finalização</button>
                     </div>
                 </div>
                 <div class="row mt-5">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-danger  w-70" data-toggle="tooltip" data-placement="top"
-                            title="Desarme Errado" onclick="alert('Desarme errado')">Desarme</button>
+                            title="Desarme Errado" onclick="console.log('Desarme errado')">Desarme</button>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-danger  w-70" data-toggle="tooltip" data-placement="top"
-                            title="Interceptação Errada" onclick="alert('Interceptação errada')">Interceptação</button>
+                            title="Interceptação Errada"
+                            onclick="console.log('Interceptação errada')">Interceptação</button>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-danger  w-70" data-toggle="tooltip" data-placement="top"
-                            title="Virada Errada" onclick="alert('Virada de jogo errada')">Virada de jogo</button>
+                            title="Virada Errada" onclick="console.log('Virada de jogo errada')">Virada de jogo</button>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div aria-live="polite" aria-atomic="true" class="toast-container ">
+            <div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="mr-auto">Alerta</strong>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="toast-body" id="alertMessage">
+                    
+                </div>
+            </div>
+        </div>
     </div>
-
-
-    <!-- <div class="formation-select">
-        <label for="formation">Escolha a formação:</label>
-        <select id="formation" onchange="updateFormation()">
-            <option value="4-4-2">4-4-2</option>
-            <option value="4-3-3">4-3-3</option>
-            <option value="3-5-2">3-5-2</option>
-            <option value="5-3-2">5-3-2</option>
-        </select>
-
-    </div> -->
-
-
     <script>
         let selectedPlayer = null;
         let selectedFormation = '4-4-2';
@@ -371,6 +376,47 @@
                 selectedFormation = selectedText;
                 updateFormation();
             });
+        });
+
+        function evento(evento) {
+            const eventoMensa =  `Evento ${evento} capturado`;
+             $('#alertMessage').html(eventoMensa);
+            showToast();
+        }
+
+
+        function showToast() {
+            var toastEl = document.getElementById('toast');
+            var toast = new bootstrap.Toast(toastEl, {
+                autohide: true,
+                delay: 3000 // Tempo em milissegundos
+            });
+            toast.show();
+        }
+
+        function enterFullscreen() {
+            const elem = document.documentElement; // Seleciona o elemento raiz (documento)
+
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.mozRequestFullScreen) { // Firefox
+                elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullscreen) { // Chrome, Safari e Opera
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { // Internet Explorer/Edge
+                elem.msRequestFullscreen();
+            }
+        }
+
+        document.getElementById('fullscreenBtn').addEventListener('click', enterFullscreen);
+
+        document.addEventListener('fullscreenchange', () => {
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            if (document.fullscreenElement) {
+                fullscreenBtn.style.display = 'none'; // Oculta o botão em tela cheia
+            } else {
+                fullscreenBtn.style.display = 'block'; // Mostra o botão fora da tela cheia
+            }
         });
 
         const playerPositions = {
@@ -388,43 +434,22 @@
                 { name: 'F2', x: 300, y: 170, player: 'Bruno Henrique', number: 27 }
             ],
             '4-3-3': [
-                { name: 'G', x: 0, y: 120, player: 'Nome', number: 1 },
-                { name: 'D1', x: 100, y:0, player: 'Nome', number: 2 }, 
-                { name: 'D2', x: 70, y: 75, player: 'Nome', number: 3 }, 
-                { name: 'D3', x: 70, y: 150, player: 'Nome', number: 4 }, 
-                { name: 'D4', x: 100, y: 225, player: 'Nome', number: 5 },
-                { name: 'M1', x: 220, y: 37, player: 'Nome', number: 6 }, 
-                { name: 'M2', x: 180, y: 112, player: 'Nome', number: 7 }, 
-                { name: 'M3', x: 220, y: 185, player: 'Nome', number: 8 },
-                { name: 'F1', x: 300, y: 70, player: 'Nome', number: 9 }, 
-                { name: 'F2', x: 375, y: 120, player: 'Nome', number: 10 }, 
-                { name: 'F3', x: 300, y: 170, player: 'Nome', number: 11 }
+                { name: 'G', x: 50, y: 175 },
+                { name: 'D1', x: 150, y: 50 }, { name: 'D2', x: 150, y: 125 }, { name: 'D3', x: 150, y: 225 }, { name: 'D4', x: 150, y: 300 },
+                { name: 'M1', x: 300, y: 75 }, { name: 'M2', x: 300, y: 175 }, { name: 'M3', x: 300, y: 275 },
+                { name: 'F1', x: 500, y: 75 }, { name: 'F2', x: 500, y: 175 }, { name: 'F3', x: 500, y: 275 }
             ],
             '3-5-2': [
-                { name: 'G', x: 0, y: 120, player: 'Nome', number: 1 },
-                { name: 'D1', x: 100, y: 0, player: 'Nome', number: 2 }, 
-                { name: 'D2', x: 70, y: 120, player: 'Nome', number: 3 }, 
-                { name: 'D3', x: 100, y: 225, player: 'Nome', number: 4 },
-                { name: 'M1', x: 300, y: 0, player: 'Nome', number: 5 }, 
-                { name: 'M2', x: 225, y: 50, player: 'Nome', number: 6 }, 
-                { name: 'M3', x: 175, y: 120, player: 'Nome', number: 7 }, 
-                { name: 'M4', x: 225, y: 190, player: 'Nome', number: 8 }, 
-                { name: 'M5', x: 300, y: 225, player: 'Nome', number: 9 },
-                { name: 'F1', x: 400, y: 85, player: 'Nome', number: 10 }, 
-                { name: 'F2', x: 400, y: 172, player: 'Nome', number: 11 }
+                { name: 'G', x: 50, y: 175 },
+                { name: 'D1', x: 150, y: 75 }, { name: 'D2', x: 150, y: 175 }, { name: 'D3', x: 150, y: 275 },
+                { name: 'M1', x: 300, y: 25 }, { name: 'M2', x: 300, y: 100 }, { name: 'M3', x: 300, y: 175 }, { name: 'M4', x: 300, y: 250 }, { name: 'M5', x: 300, y: 325 },
+                { name: 'F1', x: 500, y: 125 }, { name: 'F2', x: 500, y: 225 }
             ],
             '5-3-2': [
-                { name: 'G', x: 0, y: 120, player: 'Nome', number: 1 },
-                { name: 'D1', x: 150, y: 0, player: 'Nome', number: 2 }, 
-                { name: 'D2', x: 90, y: 50, player: 'Nome', number: 2 }, 
-                { name: 'D3', x: 70, y: 120, player: 'Nome', number: 3 }, 
-                { name: 'D4', x: 90, y: 190, player: 'Nome', number: 4 }, 
-                { name: 'D5', x: 150, y: 225, player: 'Nome', number: 5 },
-                { name: 'M1', x: 250, y: 37, player: 'Nome', number: 6 }, 
-                { name: 'M2', x: 210, y: 112, player: 'Nome', number: 7 }, 
-                { name: 'M3', x: 250, y: 185, player: 'Nome', number: 8 },
-                { name: 'F1', x: 350, y: 75, player: 'Nome', number: 9 }, 
-                { name: 'F2', x: 350, y: 150, player: 'Nome', number: 10 }
+                { name: 'G', x: 50, y: 175 },
+                { name: 'D1', x: 150, y: 25 }, { name: 'D2', x: 150, y: 100 }, { name: 'D3', x: 150, y: 175 }, { name: 'D4', x: 150, y: 250 }, { name: 'D5', x: 150, y: 325 },
+                { name: 'M1', x: 300, y: 75 }, { name: 'M2', x: 300, y: 175 }, { name: 'M3', x: 300, y: 287.5 },
+                { name: 'F1', x: 500, y: 125 }, { name: 'F2', x: 500, y: 231.25 }
             ]
         };
 
