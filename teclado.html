@@ -210,7 +210,7 @@
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
-                        <a type="button"  class="btn btn-outline-warning  w-100" href="teclado.html">Limpar</a>
+                        <a type="button" class="btn btn-outline-warning  w-100" href="teclado.html">Limpar</a>
                     </div>
                 </div>
                 <div class="row mt-4">
@@ -249,7 +249,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-success w-70" data-toggle="tooltip" data-placement="top"
-                            title="Passe certo" onclick="console.log('Passe certo')">Passe</button>
+                            title="Passe certo" onclick="sendMessage('Passe certo')">Passe</button>
                     </div>
                 </div>
                 <div class="row mt-4">
@@ -360,14 +360,17 @@
                     </button>
                 </div>
                 <div class="toast-body" id="alertMessage">
-                    
+
                 </div>
             </div>
         </div>
     </div>
+    <input type= "hidden" id= "idMatch">
+    
     <script>
         let selectedPlayer = null;
         let selectedFormation = '4-4-2';
+        let selectedQuadrant = null;
 
         $(document).ready(function () {
             $('.dropdown-item').click(function () {
@@ -379,8 +382,8 @@
         });
 
         function evento(evento) {
-            const eventoMensa =  `Evento ${evento} capturado`;
-             $('#alertMessage').html(eventoMensa);
+            const eventoMensa = `Evento ${evento} capturado`;
+            $('#alertMessage').html(eventoMensa);
             showToast();
         }
 
@@ -435,41 +438,41 @@
             ],
             '4-3-3': [
                 { name: 'G', x: 0, y: 120, player: 'Nome', number: 1 },
-                { name: 'D1', x: 100, y:0, player: 'Nome', number: 2 }, 
-                { name: 'D2', x: 70, y: 75, player: 'Nome', number: 3 }, 
-                { name: 'D3', x: 70, y: 150, player: 'Nome', number: 4 }, 
+                { name: 'D1', x: 100, y: 0, player: 'Nome', number: 2 },
+                { name: 'D2', x: 70, y: 75, player: 'Nome', number: 3 },
+                { name: 'D3', x: 70, y: 150, player: 'Nome', number: 4 },
                 { name: 'D4', x: 100, y: 225, player: 'Nome', number: 5 },
-                { name: 'M1', x: 220, y: 37, player: 'Nome', number: 6 }, 
-                { name: 'M2', x: 180, y: 112, player: 'Nome', number: 7 }, 
+                { name: 'M1', x: 220, y: 37, player: 'Nome', number: 6 },
+                { name: 'M2', x: 180, y: 112, player: 'Nome', number: 7 },
                 { name: 'M3', x: 220, y: 185, player: 'Nome', number: 8 },
-                { name: 'F1', x: 300, y: 70, player: 'Nome', number: 9 }, 
-                { name: 'F2', x: 375, y: 120, player: 'Nome', number: 10 }, 
+                { name: 'F1', x: 300, y: 70, player: 'Nome', number: 9 },
+                { name: 'F2', x: 375, y: 120, player: 'Nome', number: 10 },
                 { name: 'F3', x: 300, y: 170, player: 'Nome', number: 11 }
             ],
             '3-5-2': [
                 { name: 'G', x: 0, y: 120, player: 'Nome', number: 1 },
-                { name: 'D1', x: 100, y: 0, player: 'Nome', number: 2 }, 
-                { name: 'D2', x: 70, y: 120, player: 'Nome', number: 3 }, 
+                { name: 'D1', x: 100, y: 0, player: 'Nome', number: 2 },
+                { name: 'D2', x: 70, y: 120, player: 'Nome', number: 3 },
                 { name: 'D3', x: 100, y: 225, player: 'Nome', number: 4 },
-                { name: 'M1', x: 300, y: 0, player: 'Nome', number: 5 }, 
-                { name: 'M2', x: 225, y: 50, player: 'Nome', number: 6 }, 
-                { name: 'M3', x: 175, y: 120, player: 'Nome', number: 7 }, 
-                { name: 'M4', x: 225, y: 190, player: 'Nome', number: 8 }, 
+                { name: 'M1', x: 300, y: 0, player: 'Nome', number: 5 },
+                { name: 'M2', x: 225, y: 50, player: 'Nome', number: 6 },
+                { name: 'M3', x: 175, y: 120, player: 'Nome', number: 7 },
+                { name: 'M4', x: 225, y: 190, player: 'Nome', number: 8 },
                 { name: 'M5', x: 300, y: 225, player: 'Nome', number: 9 },
-                { name: 'F1', x: 400, y: 85, player: 'Nome', number: 10 }, 
+                { name: 'F1', x: 400, y: 85, player: 'Nome', number: 10 },
                 { name: 'F2', x: 400, y: 172, player: 'Nome', number: 11 }
             ],
             '5-3-2': [
                 { name: 'G', x: 0, y: 120, player: 'Nome', number: 1 },
-                { name: 'D1', x: 150, y: 0, player: 'Nome', number: 2 }, 
-                { name: 'D2', x: 90, y: 50, player: 'Nome', number: 2 }, 
-                { name: 'D3', x: 70, y: 120, player: 'Nome', number: 3 }, 
-                { name: 'D4', x: 90, y: 190, player: 'Nome', number: 4 }, 
+                { name: 'D1', x: 150, y: 0, player: 'Nome', number: 2 },
+                { name: 'D2', x: 90, y: 50, player: 'Nome', number: 2 },
+                { name: 'D3', x: 70, y: 120, player: 'Nome', number: 3 },
+                { name: 'D4', x: 90, y: 190, player: 'Nome', number: 4 },
                 { name: 'D5', x: 150, y: 225, player: 'Nome', number: 5 },
-                { name: 'M1', x: 250, y: 37, player: 'Nome', number: 6 }, 
-                { name: 'M2', x: 210, y: 112, player: 'Nome', number: 7 }, 
+                { name: 'M1', x: 250, y: 37, player: 'Nome', number: 6 },
+                { name: 'M2', x: 210, y: 112, player: 'Nome', number: 7 },
                 { name: 'M3', x: 250, y: 185, player: 'Nome', number: 8 },
-                { name: 'F1', x: 350, y: 75, player: 'Nome', number: 9 }, 
+                { name: 'F1', x: 350, y: 75, player: 'Nome', number: 9 },
                 { name: 'F2', x: 350, y: 150, player: 'Nome', number: 10 }
             ]
         };
@@ -545,87 +548,87 @@
 
             //linha 1
             if (x <= 100 && y < 66)
-                console.log('quadrante 1');
+                selectedQuadrant = 1
             else if (x >= 100 && x <= 200 && y < 66)
-                console.log('quadrante 7');
+                selectedQuadrant = 7
             else if (x >= 200 && x <= 300 && y < 66)
-                console.log('quadrante 13');
+                selectedQuadrant = 13
             else if (x >= 300 && x <= 400 && y < 66)
-                console.log('quadrante 19');
+                selectedQuadrant = 19
             else if (x >= 400 && x <= 500 && y < 66)
-                console.log('quadrante 25');
+                selectedQuadrant = 25
             else if (x >= 500 && x <= 600 && y < 66)
-                console.log('quadrante 31');
+                selectedQuadrant = 31
 
             //linha 2
             else if (x <= 100 && y < 132)
-                console.log('quadrante 2');
+                selectedQuadrant = 2
             else if (x >= 100 && x <= 200 && y < 132)
-                console.log('quadrante 8');
+                selectedQuadrant = 8
             else if (x >= 200 && x <= 300 && y < 132)
-                console.log('quadrante 14');
+                selectedQuadrant = 14
             else if (x >= 300 && x <= 400 && y < 132)
-                console.log('quadrante 20');
+                selectedQuadrant = 20
             else if (x >= 400 && x <= 500 && y < 132)
-                console.log('quadrante 26');
+                selectedQuadrant = 26
             else if (x >= 500 && x <= 600 && y < 132)
-                console.log('quadrante 32');
+                selectedQuadrant = 32
 
             //linha 3
             else if (x <= 100 && y < 198)
-                console.log('quadrante 3');
+                selectedQuadrant = 3
             else if (x >= 100 && x <= 200 && y < 198)
-                console.log('quadrante 9');
+                selectedQuadrant = 9
             else if (x >= 200 && x <= 300 && y < 198)
-                console.log('quadrante 15');
+                selectedQuadrant = 15
             else if (x >= 300 && x <= 400 && y < 198)
-                console.log('quadrante 21');
+                selectedQuadrant = 21
             else if (x >= 400 && x <= 500 && y < 198)
-                console.log('quadrante 27');
+                selectedQuadrant = 27
             else if (x >= 500 && x <= 600 && y < 198)
-                console.log('quadrante 33');
+                selectedQuadrant = 33
 
             //linha 4    
             else if (x <= 100 && y < 264)
-                console.log('quadrante 4');
+                selectedQuadrant = 4
             else if (x >= 100 && x <= 200 && y < 264)
-                console.log('quadrante 10');
+                selectedQuadrant = 10
             else if (x >= 200 && x <= 300 && y < 264)
-                console.log('quadrante 16');
+                selectedQuadrant = 16
             else if (x >= 300 && x <= 400 && y < 264)
-                console.log('quadrante 22');
+                selectedQuadrant = 22
             else if (x >= 400 && x <= 500 && y < 264)
-                console.log('quadrante 28');
+                selectedQuadrant = 28
             else if (x >= 500 && x <= 600 && y < 264)
-                console.log('quadrante 34');
+                selectedQuadrant = 34
 
             //linha 5
             else if (x <= 100 && y < 330)
-                console.log('quadrante 5');
+                selectedQuadrant = 5
             else if (x >= 100 && x <= 200 && y < 330)
-                console.log('quadrante 11');
+                selectedQuadrant = 11
             else if (x >= 200 && x <= 300 && y < 330)
-                console.log('quadrante 17');
+                selectedQuadrant = 17
             else if (x >= 300 && x <= 400 && y < 330)
-                console.log('quadrante 23');
+                selectedQuadrant = 23
             else if (x >= 400 && x <= 500 && y < 330)
-                console.log('quadrante 29');
+                selectedQuadrant = 29
             else if (x >= 500 && x <= 600 && y < 330)
-                console.log('quadrante 35');
+                selectedQuadrant = 35
 
             //linha 6    
             else if (x <= 100 && y < 396)
-                console.log('quadrante 6');
+                selectedQuadrant = 6
             else if (x >= 100 && x <= 200 && y < 396)
-                console.log('quadrante 12');
+                selectedQuadrant = 12
             else if (x >= 200 && x <= 300 && y < 396)
-                console.log('quadrante 18');
+                selectedQuadrant = 18
             else if (x >= 300 && x <= 400 && y < 396)
-                console.log('quadrante 24');
+                selectedQuadrant = 24
             else if (x >= 400 && x <= 500 && y < 396)
-                console.log('quadrante 30');
+                selectedQuadrant = 30
             else if (x >= 500 && x <= 600 && y < 396)
-                console.log('quadrante 36');
+                selectedQuadrant = 36
 
 
 
@@ -641,7 +644,78 @@
 
         updateFormation();
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.9/signalr.min.js"></script>
 
+    <script>
+        const url = "https://chat-hub.footstats.com.br/chat";
+        //ws://9fe9-2804-7f0-b9c1-9867-7546-d690-a7b2-d7f0.ngrok-free.app/
+        // Crie uma conexão com o hub
+        const connection = new signalR.HubConnectionBuilder()
+            //.withUrl("http://localhost:7182/chat")  // Ajuste a URL conforme necessário
+            .withUrl(url)
+            .build();
+
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Exemplo de uso: obter o valor do parâmetro 'match'
+        const matchFromQuery = getQueryParam('idMatch');
+        if (matchFromQuery) {
+            document.getElementById('idMatch').value = matchFromQuery;
+        }
+
+        // Receba mensagens do servidor
+        connection.on(matchFromQuery, (message) => {
+            const msg = document.createElement("li");
+            msg.textContent = `${matchFromQuery}: ${message}`;
+            //document.getElementById("messagesList").appendChild(msg);
+        });
+
+        // Inicie a conexão
+        connection.start().catch(err => console.error(err.toString()));
+
+        // Envie uma mensagem ao servidor
+        function sendMessage(fundamento) {
+            const match = document.getElementById("idMatch").value;
+            let message = {
+                coleta:
+                {
+                    tempo: "1T",
+                    segs: "1200",
+                    jogador: selectedPlayer,
+                    quadrante: selectedQuadrant,
+                    fundamento,
+                    posse: "3",
+                    Id: "1",
+                    coleta: getCurrentDate(),
+                    atualizacao: getCurrentDate()
+
+                },
+
+            };
+            //if
+            message.finalizacao =
+            {
+                trueorfalse: "true",
+                tipo: fundamento,
+                jogador: selectedPlayer,
+                per: "1T",
+                sec: "2200"
+
+            };
+            connection.invoke("EnviarMensagem", match, JSON.stringify(message)).catch(err => console.error(err.toString()));
+        }
+        function getCurrentDate() {
+            const now = new Date();
+            const day = String(now.getDate()).padStart(2, '0');
+            const month = String(now.getMonth() + 1).padStart(2, '0'); // Os meses começam em 0
+            const year = now.getFullYear();
+
+            return `${day}/${month}/${year}`;
+        }
+    </script>
 </body>
 
 </html>
