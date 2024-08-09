@@ -174,38 +174,43 @@
             <div class="col-md-1">
                 <div class="row">
                     <div class="col-md-12">
-                        <button type="button" class="btn btn-success  w-100" onclick="evento('gol')">Gol</button>
+                        <button type="button" class="btn btn-success  w-100" onclick="sendMessage('gol')">Gol</button>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
-                        <button type="button" class="btn btn-danger   w-100">Gol contra</button>
+                        <button type="button" class="btn btn-danger   w-100" title="Gol contra"
+                            onclick="sendMessage('Gol contra')">Gol contra</button>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
-                        <button type="button" class="btn btn-warning   w-100">Pênalti</button>
+                        <button type="button" class="btn btn-warning   w-100" title="Pênalti"
+                            onclick="sendMessage('Pênalti')">Pênalti</button>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
-                        <button type="button" class="btn btn-lilas  w-100">Rebat.</button>
+                        <button type="button" class="btn btn-lilas  w-100" title="Rebatida"
+                            onclick="sendMessage('Rebatida')">Rebat.</button>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
-                        <button type="button" class="btn btn-success   w-100">Defesa</button>
+                        <button type="button" class="btn btn-success   w-100" title="Defesa"
+                            onclick="sendMessage('Defesa')">Defesa</button>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
-                        <button type="button" class="btn btn-danger  w-100">Defesa difícil</button>
+                        <button type="button" class="btn btn-danger  w-100" title="Defesa difícil"
+                            onclick="sendMessage('Defesa difícil')">Defesa difícil</button>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
-                        <button type="button" class="btn btn-dark  w-100">Pênalti <span
-                                style="font-size:13px">defendido</span></button>
+                        <button type="button" class="btn btn-dark  w-100">Pênalti <span style="font-size:13px"
+                                title="defendido" onclick="sendMessage('Pênalti defendido')">defendido</span></button>
                     </div>
                 </div>
                 <div class="row mt-4">
@@ -255,25 +260,25 @@
                 <div class="row mt-4">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-success w-70" data-toggle="tooltip" data-placement="top"
-                            title="Drible certo" onclick="console.log('Drible certo')">Drible</button>
+                            title="Drible certo" onclick="sendMessage('Drible certo')">Drible</button>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-success w-70" data-toggle="tooltip" data-placement="top"
-                            title="Lançamento certo" onclick="console.log('Lançamento certo')">Lançamento</button>
+                            title="Lançamento certo" onclick="sendMessage('Lançamento certo')">Lançamento</button>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-success w-70" data-toggle="tooltip" data-placement="top"
-                            title="Cruzamento certo" onclick="console.log('Cruzamento certo')">Cruzamento</button>
+                            title="Cruzamento certo" onclick="sendMessage('Cruzamento certo')">Cruzamento</button>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-success  w-70" data-toggle="tooltip" data-placement="top"
-                            title="Finalização certa" onclick="console.log('Finalização certa')">
+                            title="Finalização certa" onclick="sendMessage('Finalização certa')">
                             Finalização
                         </button>
                     </div>
@@ -281,20 +286,20 @@
                 <div class="row mt-5">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-success w-70" data-toggle="tooltip" data-placement="top"
-                            title="Desarme certo" onclick="console.log('Desarme certo')">Desarme</button>
+                            title="Desarme certo" onclick="sendMessage('Desarme certo')">Desarme</button>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-success w-70" data-toggle="tooltip" data-placement="top"
                             title="Interceptação certa"
-                            onclick="console.log('Interceptação certo')">Interceptação</button>
+                            onclick="sendMessage('Interceptação certo')">Interceptação</button>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-success w-70" data-toggle="tooltip" data-placement="top"
-                            title="Virada certa" onclick="console.log('Virada de jogo certa')">Virada de jogo</button>
+                            title="Virada certa" onclick="sendMessage('Virada de jogo certa')">Virada de jogo</button>
                     </div>
                 </div>
             </div>
@@ -302,50 +307,50 @@
                 <div class="row">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-danger  w-70" data-toggle="tooltip" data-placement="top"
-                            title="Passe Errado" onclick="console.log('Passe Errado')">Passe </button>
+                            title="Passe Errado" onclick="sendMessage('Passe Errado')">Passe </button>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-danger  w-70" data-toggle="tooltip" data-placement="top"
-                            title="Drible Errado" onclick="console.log('Drible errado ')">Drible </button>
+                            title="Drible Errado" onclick="sendMessage('Drible errado ')">Drible </button>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-danger  w-70" data-toggle="tooltip" data-placement="top"
-                            title="Lançamento Errado" onclick="console.log('Lançamento errado ')">Lançamento</button>
+                            title="Lançamento Errado" onclick="sendMessage('Lançamento errado ')">Lançamento</button>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-danger  w-70" data-toggle="tooltip" data-placement="top"
-                            title="Cruzamento Errado" onclick="console.log('Cruzamento errado ')">Cruzamento</button>
+                            title="Cruzamento Errado" onclick="sendMessage('Cruzamento errado ')">Cruzamento</button>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-danger  w-70" data-toggle="tooltip" data-placement="top"
-                            title="Finalização Errada" onclick="console.log('Finalização errada')">Finalização</button>
+                            title="Finalização Errada" onclick="sendMessage('Finalização errada')">Finalização</button>
                     </div>
                 </div>
                 <div class="row mt-5">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-danger  w-70" data-toggle="tooltip" data-placement="top"
-                            title="Desarme Errado" onclick="console.log('Desarme errado')">Desarme</button>
+                            title="Desarme Errado" onclick="sendMessage('Desarme errado')">Desarme</button>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-danger  w-70" data-toggle="tooltip" data-placement="top"
                             title="Interceptação Errada"
-                            onclick="console.log('Interceptação errada')">Interceptação</button>
+                            onclick="sendMessage('Interceptação errada')">Interceptação</button>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-danger  w-70" data-toggle="tooltip" data-placement="top"
-                            title="Virada Errada" onclick="console.log('Virada de jogo errada')">Virada de jogo</button>
+                            title="Virada Errada" onclick="sendMessage('Virada de jogo errada')">Virada de jogo</button>
                     </div>
                 </div>
             </div>
@@ -365,8 +370,8 @@
             </div>
         </div>
     </div>
-    <input type= "hidden" id= "idMatch">
-    
+    <input type="hidden" id="idMatch">
+
     <script>
         let selectedPlayer = null;
         let selectedFormation = '4-4-2';
@@ -695,16 +700,16 @@
                 },
 
             };
-            //if
-            message.finalizacao =
-            {
-                trueorfalse: "true",
-                tipo: fundamento,
-                jogador: selectedPlayer,
-                per: "1T",
-                sec: "2200"
 
-            };
+            if (fundamento == "Finalização certa" || "Finalização errada") {
+                message.finalizacao = {
+                    trueorfalse: "true",
+                    tipo: fundamento,
+                    jogador: selectedPlayer,
+                    per: "1T",
+                    sec: "2200"
+                };
+            }
             connection.invoke("EnviarMensagem", match, JSON.stringify(message)).catch(err => console.error(err.toString()));
         }
         function getCurrentDate() {
