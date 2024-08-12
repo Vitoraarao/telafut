@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Bootstrap Example</title>
+    <title>Coletor</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -23,42 +23,8 @@
         .finalizacao-height {
             height: 200px;
             overflow-y: auto;
-            /* Adiciona barra de rolagem caso o conteúdo ultrapasse a altura definida */
         }
     </style>
-    <script>
-        function openFullScreen(url) {
-            // Abre uma nova janela
-            var newWindow = window.open(url, 'newWindow', 'width=1920,height=1080');
-
-            // Tenta colocar a nova janela em tela cheia
-            if (newWindow) {
-                newWindow.onload = function () {
-                    if (newWindow.document.fullscreenEnabled || newWindow.document.webkitFullscreenEnabled || newWindow.document.mozFullScreenEnabled || newWindow.document.msFullscreenEnabled) {
-                        var requestFullScreen = newWindow.document.documentElement.requestFullscreen ||
-                            newWindow.document.documentElement.webkitRequestFullscreen ||
-                            newWindow.document.documentElement.mozRequestFullScreen ||
-                            newWindow.document.documentElement.msRequestFullscreen;
-                        if (requestFullScreen) {
-                            requestFullScreen.call(newWindow.document.documentElement);
-                        }
-                    }
-                }
-            }
-
-            const elem = document.documentElement; // Seleciona o elemento raiz (documento)
-
-            if (elem.requestFullscreen) {
-                elem.requestFullscreen();
-            } else if (elem.mozRequestFullScreen) { // Firefox
-                elem.mozRequestFullScreen();
-            } else if (elem.webkitRequestFullscreen) { // Chrome, Safari e Opera
-                elem.webkitRequestFullscreen();
-            } else if (elem.msRequestFullscreen) { // Internet Explorer/Edge
-                elem.msRequestFullscreen();
-            }
-        }
-    </script>
 </head>
 
 <body>
@@ -67,18 +33,31 @@
             <div class="card-header sticky-top bg-white">
                 <div class="row">
                     <div class="col-md-1">
-                        <button type="button" class="btn btn-primary w-100">Iniciar</button>
+                        <button type="button" onclick="startTimer()" class="btn btn-primary w-100">Iniciar</button>
                     </div>
                     <div class="col-md-1">
-                        <button type="button" class="btn btn-warning ">Alterar</button>
+                        <button type="button" onclick="pauseTimer()" class="btn btn-warning ">Alterar</button>
                     </div>
                     <div class="col-md-2">
-                        <div class="btn">1° tp - 42:45</div>
+                        <div class="input-group mb-3 w-auto">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">cron.</span>
+                            </div>
+                            <input type="text" style="width: 90px;" id="cronometro" placeholder="00:00:00" min="0">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="input-group mb-3 w-auto">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Tempo</span>
+                            </div>
+                            <input type="text" style="width: 50px;" id="tempo" placeholder="1tp" value="1" min="0">
+                        </div>
                     </div>
                     <div class="col-md-1">
-                        <button type="button" class="btn btn-danger">Encerrar</button>
+                        <button type="button" onclick="resetTimer()" class="btn btn-danger">Encerrar</button>
                     </div>
-                    <div class="offset-md-1 col-md-5 d-flex align-items-center justify-content-center">
+                    <div class=" col-md-4 d-flex align-items-center justify-content-center">
                         <div class="input-group mb-3 w-auto">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">BRA</span>
@@ -94,17 +73,16 @@
                         </div>
                     </div>
                     <div class="col-md-1 ">
-                        <button type="button" onclick="openFullScreen('teclado.html')"
+                        <button type="button" onclick="openFullScreen('teclado.html?idMatch=1234')"
                             class="btn btn-success">Teclado</button>
                     </div>
                 </div>
             </div>
             <div class="finalizacao-height">
-                <p><button id="addRow">Add new row</button></p>
-                <table id="example" class="display" style="width:100%">
+                <table id="finalizacao" class="display" style="width:100%">
                     <thead>
                         <tr>
-                            <th>?</th>
+                            <th>Classificado</th>
                             <th>Tipo</th>
                             <th>Jogador</th>
                             <th>Per</th>
@@ -112,19 +90,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>False</td>
-                            <td>FinalizacaoCerta</td>
-                            <td>Matheus Pereira</td>
-                            <td>2T</td>
-                            <td>2244</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
-
             <div class="card-footer">
-                <p><button id="addRowTwo">Add new row</button></p>
                 <table id="eventos" class="display" style="width:100%">
                     <thead>
                         <tr>
@@ -140,17 +109,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Segundo Tempo</td>
-                            <td>2999</td>
-                            <td>Lautaro Diaz</td>
-                            <td>33</td>
-                            <td>Finalização Errada</td>
-                            <td>2</td>
-                            <td>44332211</td>
-                            <td>2024-08-06T06:18:35.930</td>
-                            <td>2024-08-06T06:18:35.930</td>
-                        </tr>
+
                     </tbody>
                 </table>
             </div>
@@ -160,52 +119,106 @@
     <script src="https://cdn.datatables.net/2.1.3/js/dataTables.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.9/signalr.min.js"></script>
     <script>
+        let table;
+        let tableTwo;
+        let events = [];
+        function getEvents() {
+            const events = JSON.parse(localStorage.getItem('eventos'));
+            if (events) {
+                events.forEach(event => {
+                    addEvent(event);
+                });
+            }
+        }
+
+        function getShots() {
+            const shots = JSON.parse(localStorage.getItem('finalizacao'));
+            if (shots) {
+                shots.forEach(shot => {
+                    addShots(shot);
+                });
+            }
+        }
+
         $(document).ready(function () {
-            const table = $('#example').DataTable({
+            table = $('#finalizacao').DataTable({
                 paging: false,
                 searching: false,
-                ordering: false,
+                ordering: true,
                 info: false
             });
 
-            const tableTwo = $('#eventos').DataTable({
+            tableTwo = $('#eventos').DataTable({
                 dom: 'Bfrtip',
                 pageLength: 30,
-                order: [[1, "desc"]],
+                order: [
+                    [1, "desc"],
+                    [0, "desc"]
+                ],
                 info: false,
                 oLanguage: {
                     sSearch: "Buscar evento:"
                 }
             });
-
-            $('#addRow').on('click', function () {
-                table.row.add([
-                    'TrueOrFalse',  //Textos das tabelas
-                    'Tipo',
-                    'Jogador',
-                    'Per',
-                    'Sec'
-                ]).draw(false);
-            });
-
-            $('#addRowTwo').on('click', function () {
-                tableTwo.row.add([
-                    'Tempo',  //Textos das tabelas
-                    'Segs',
-                    'Jogador',
-                    'Q',
-                    'Fundamento',
-                    'Posse',
-                    'Id',
-                    'Coleta',
-                    'Atualizacao'
-                ]).draw(false);
-            });
+            getEvents();
+            getShots();
         });
 
-        const url = "https://chat-hub.footstats.com.br/chat";
-        //const url = "https://localhost:44311/chat";
+        function openFullScreen(url) {
+            var newWindow = window.open(url, 'newWindow', 'width=1920,height=1080');
 
+            if (newWindow) {
+                newWindow.onload = function () {
+                    if (newWindow.document.fullscreenEnabled || newWindow.document.webkitFullscreenEnabled || newWindow.document.mozFullScreenEnabled || newWindow.document.msFullscreenEnabled) {
+                        var requestFullScreen = newWindow.document.documentElement.requestFullscreen ||
+                            newWindow.document.documentElement.webkitRequestFullscreen ||
+                            newWindow.document.documentElement.mozRequestFullScreen ||
+                            newWindow.document.documentElement.msRequestFullscreen;
+                        if (requestFullScreen) {
+                            requestFullScreen.call(newWindow.document.documentElement);
+                        }
+                    }
+                }
+            }
+
+            const elem = document.documentElement;
+
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.mozRequestFullScreen) {
+                elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullscreen) {
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) {
+                elem.msRequestFullscreen();
+            }
+        }
+
+        function addShots(shots) {
+            table.row.add([
+            shots.trueorfalse,
+                shots.tipo,
+                shots.jogador,
+                shots.per,
+                shots.sec
+            ]).draw(false);
+        }
+
+        function addEvent(events) {
+            tableTwo.row.add([
+                events.tempo,
+                events.segs,
+                events.jogador,
+                events.quadrante,
+                events.fundamento,
+                events.posse,
+                events.id,
+                events.coleta,
+                events.atualizacao
+            ]).draw(false);
+        }
+
+        const url = "https://chat-hub.footstats.com.br/chat";
         const connection = new signalR.HubConnectionBuilder()
             .withUrl(url)
             .build();
@@ -224,9 +237,21 @@
         // Receba mensagens do servidor
         connection.on(matchFromQuery, (message) => {
             console.log(message);
+            const { finalizacao, coleta } = JSON.parse(message);
+            addEvent(coleta);
+            saveLocal(coleta, 'eventos');
+
+            if (finalizacao) {
+                addShots(finalizacao);
+                saveLocal(finalizacao, 'finalizacao');
+            }
         });
 
-        
+        function saveLocal(item, key) {
+            var items = JSON.parse(localStorage.getItem(key)) || [];
+            items.push(item);
+            localStorage.setItem(key, JSON.stringify(items));
+        }
 
         // Inicie a conexão
         //connection.start().catch(err => console.error(err.toString()));
@@ -246,6 +271,92 @@
 
         // Start the connection.
         start();
+
+        //Cronometro
+        let initialTime = 0; // Exemplo: tempo inicial em segundos (1h, 1min, 5s)
+
+        function getCronometroLocaStorage() {
+            const tempo = localStorage.getItem('cronometroColeta') || '00:00:00';
+            initialTime = getSeconds(tempo);
+        }
+        getCronometroLocaStorage();
+        let hours = Math.floor(initialTime / 3600);
+        let minutes = Math.floor((initialTime % 3600) / 60);
+        let seconds = initialTime % 60;
+        let timer;
+        let running = false;
+
+        // Atualiza a exibição com o tempo inicial
+        updateDisplay();
+
+        function getSeconds(tempo) {
+            // const tempo = document.getElementById('cronometro').value;
+            const partes = tempo.split(":");
+            const horasEmSegundos = parseInt(partes[0]) * 3600; // 1 hora = 3600 segundos
+            const minutosEmSegundos = parseInt(partes[1]) * 60; // 1 minuto = 60 segundos
+            const segundos = parseInt(partes[2]);
+            const totalSegundos = horasEmSegundos + minutosEmSegundos + segundos;
+            return totalSegundos;
+        }
+
+        function getTempo() {
+            const tempo = document.getElementById('tempo').value;
+            const partes = tempo.split("tp");
+            return parseInt(partes[0]);
+        }
+
+        function getCronometro() {
+            const tempo = document.getElementById('cronometro').value;
+            const partes = tempo.split(":");
+            return {
+                hours: parseInt(partes[0]),
+                minutes: parseInt(partes[1]),
+                seconds: parseInt(partes[2])
+            };
+        }
+
+
+        function updateDisplay() {
+            let displayHours = hours < 10 ? `0${hours}` : hours;
+            let displayMinutes = minutes < 10 ? `0${minutes}` : minutes;
+            let displaySeconds = seconds < 10 ? `0${seconds}` : seconds;
+            document.getElementById('cronometro').value = `${displayHours}:${displayMinutes}:${displaySeconds}`;
+            localStorage.setItem('cronometroColeta', `${displayHours}:${displayMinutes}:${displaySeconds}`)
+        }
+
+        function startTimer() {
+            if (!running) {
+                running = true;
+                timer = setInterval(() => {
+                    seconds++;
+                    if (seconds === 60) {
+                        seconds = 0;
+                        minutes++;
+                    }
+                    if (minutes === 60) {
+                        minutes = 0;
+                        hours++;
+                    }
+                    updateDisplay();
+                }, 1000);
+            }
+        }
+
+        function pauseTimer() {
+            if (running) {
+                clearInterval(timer);
+                running = false;
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timer);
+            hours = Math.floor(initialTime / 3600);
+            minutes = Math.floor((initialTime % 3600) / 60);
+            seconds = initialTime % 60;
+            running = false;
+            updateDisplay();
+        }
     </script>
 </body>
 
